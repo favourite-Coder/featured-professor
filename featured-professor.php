@@ -61,13 +61,14 @@ class FeaturedProfessor {
   }
 
   function renderCallback($attributes) {
-    if ($attributes['profId']) {
-      wp_enqueue_style('featuredProfessorStyle');
-      return generateProfessorHTML($attributes['profId']);
+    if (isset($attributes['profId']) && !empty($attributes['profId'])) {
+        wp_enqueue_style('featuredProfessorStyle');
+        return generateProfessorHTML($attributes['profId']);
     } else {
-      return NULL;
+        return NULL;
     }
-  }
+}
+
 
 }
 
