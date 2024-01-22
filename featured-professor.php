@@ -5,6 +5,8 @@
   Version: 1.0
   Author: Favour
   Author URI: 
+  Text Domain: featured-professor
+  Domain Path: /languages
 */
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -38,6 +40,8 @@ class FeaturedProfessor {
   }
 
   function onInit() {
+    load_plugin_textdomain('featured-professor', false, dirname(plugin_basename(__FILE__)) . '/languages');
+
     register_meta('post', 'featuredprofessor', array(
       'show_in_rest' => true,
       'type' => 'number',
@@ -46,6 +50,8 @@ class FeaturedProfessor {
 
     wp_register_script('featuredProfessorScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-i18n', 'wp-editor'));
     wp_register_style('featuredProfessorStyle', plugin_dir_url(__FILE__) . 'build/index.css');
+
+    wp_set_script_translations('featuredProfessorScript', 'featured-professor', plugin_dir_path(__FILE__) . '/languages');
 
     register_block_type('ourplugin/featured-professor', array(
       'render_callback' => [$this, 'renderCallback'],

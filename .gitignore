@@ -4,6 +4,7 @@
 !/.gitignore
 !/src/
 !/inc/
+!/languages/
 !/index.php/
 
 #  Ignore Files
