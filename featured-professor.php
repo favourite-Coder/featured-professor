@@ -9,14 +9,12 @@
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-
 require_once plugin_dir_path(__FILE__) . 'inc/generateProfessorHTML.php';
 
 class FeaturedProfessor {
   function __construct() {
     add_action('init', [$this, 'onInit']);
     add_action('rest_api_init', [$this, 'profHTML']);
-
   }
 
   function profHTML() {
@@ -31,6 +29,12 @@ class FeaturedProfessor {
   }
 
   function onInit() {
+    register_meta('post', 'featuredprofessor', array(
+      'show_in_rest' => true,
+      'type' => 'number',
+      'single' => false
+    ));
+
     wp_register_script('featuredProfessorScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-i18n', 'wp-editor'));
     wp_register_style('featuredProfessorStyle', plugin_dir_url(__FILE__) . 'build/index.css');
 
